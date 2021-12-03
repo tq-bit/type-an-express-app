@@ -1,15 +1,19 @@
 const router = require('express').Router();
 const readPackageJsonFile = require('../util/filesystem.util');
 
+async function handleRenderHomePage(req, res) {
+  res.render('home')
+}
 
-router.get('', (req, res) => res.render('home'));
-router.get('/about', async (req, res) => {
+async function handleRenderAboutPage(req, res) {
   const packageJson = await readPackageJsonFile();
-  console.log(packageJson)
   const aboutConfig = {
-    packageJson
-  }
-  res.render('about', aboutConfig)
-});
+    packageJson,
+  };
+  res.render('about', aboutConfig);
+}
+
+router.get('', handleRenderHomePage);
+router.get('/about', handleRenderAboutPage);
 
 module.exports = router;
