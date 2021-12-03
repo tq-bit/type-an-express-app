@@ -1,13 +1,13 @@
 {
   "name": "21_typescript_express",
   "version": "1.0.0",
-  "description": "",
+  "description": "This app was written for my article about getting started with Typescript. It demonstrates how to setup and develop a simple web application using TS and Express-Handlebars.",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Tobias Quante",
+  "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
     "express-handlebars": "^6.0.2"

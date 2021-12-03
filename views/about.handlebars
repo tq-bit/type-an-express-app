@@ -1,1 +1,37 @@
-<h1>About this app</h1>
+<section class='container'>
+  <article class='row'>
+    <div class='col-2'></div>
+    <div class='col'>
+      <div class='card'>
+        <div class='card-header bg-light'>
+          <h2 class='h4'>About this app</h2>
+        </div>
+        <div class='card-body'>
+          <p>
+            {{{packageJson.description}}}
+          </p>
+          <p>
+            <a href='/'>You can read the full article on my blog</a>
+          </p>
+        </div>
+        <footer class='card-footer bg-light d-flex justify-content-between'>
+          <small>
+            Version:
+            {{{packageJson.version}}}
+          </small>
+          <small>
+            Released under the
+            {{{packageJson.license}}}
+            license
+          </small>
+          <small>
+            Author:
+            {{{packageJson.author}}}
+          </small>
+        </footer>
+      </div>
+    </div>
+    <div class='col-2'></div>
+
+  </article>
+</section>
