@@ -1,15 +1,17 @@
 const router = require('express').Router();
 const readPackageJsonFile = require('../util/filesystem.util');
+const getRandomJoke = require('../services/jokes.client');
 
 async function handleRenderHomePage(req, res) {
-  res.render('home')
+  const packageJson = await readPackageJsonFile();
+  const randomJoke = await getRandomJoke();
+  const homeConfig = { packageJson, randomJoke };
+  res.render('home', homeConfig);
 }
 
 async function handleRenderAboutPage(req, res) {
   const packageJson = await readPackageJsonFile();
-  const aboutConfig = {
-    packageJson,
-  };
+  const aboutConfig = { packageJson };
   res.render('about', aboutConfig);
 }
 

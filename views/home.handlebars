@@ -1,14 +1,26 @@
 <section class='container'>
   <article class='row'>
+    <div class='col-1 col-md-2 col-lg-3'></div>
     <div class='col'>
       <div class='card'>
         <div class='card-header'>
-          <h2 class="h4">Corny Jokes application</h2>
+          <h2 class="h4">Random dev-jokes</h2>
         </div>
         <div class='card-body'>
-          I am a corny joke
+          <p>
+            {{{randomJoke.setup}}}
+          </p>
+          <p>
+            <b>{{randomJoke.delivery}}</b>
+          </p>
         </div>
+        <footer class='card-footer bg-light d-flex justify-content-between'>
+          <small>
+            Jokes are fetched from <a href="https://jokeapi.dev/">https://jokeapi.dev/</a>
+          </small>
+        </footer>
       </div>
     </div>
+    <div class='col-1 col-md-2 col-lg-3'></div>
   </article>
 </section>
