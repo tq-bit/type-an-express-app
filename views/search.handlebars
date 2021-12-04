@@ -22,12 +22,12 @@
               <div id="search-input-help-text" class="form-text">Enter a search query</div>
             </div>
             <div class="mb-3">
-              <label for="search-input" class="form-label">Count</label>
-              <input required="true" min="1" max="5" value="3" name="count" placeholder="Enter a count" type="number" class="form-control" id="search-count" aria-describedby="search-count-help-text">
+              <label for="search-input" class="form-label">Joke count</label>
+              <input required="true" min="1" max="5" value="3" name="count" placeholder="Joke count" type="number" class="form-control" id="search-count" aria-describedby="search-count-help-text">
               <div id="search-count-help-text" class="form-text">Enter how many entries you want to receive</div>
             </div>
             <div class="mb-3 form-check">
-              <input name="all" type="checkbox" class="form-check-input" id="search-all-jokes-enabled">
+              <input name="all" checked="true" type="checkbox" class="form-check-input" id="search-all-jokes-enabled">
               <label class="form-check-label" for="search-all-jokes-enabled">Search all jokes</label>
             </div>
             <div class="mb-3 form-check">
@@ -39,6 +39,7 @@
           {{!-- Search form end --}}
 
           {{#if searchResults}}
+
           {{!-- Joke parsing --}}
           {{#if searchResults.jokes}}
           <hr />
