@@ -16,7 +16,7 @@ async function renderAboutPage(req, res) {
 }
 
 async function renderSearchPage(req, res) {
-  const hasSearchRequest = Object.keys(req.query).length > 0
+  const hasSearchRequest = Object.keys(req.query).length > 0;
   const packageJson = await readPackageJsonFile();
   let searchConfig = { packageJson };
   if (hasSearchRequest) {
@@ -26,8 +26,13 @@ async function renderSearchPage(req, res) {
   res.render('search', searchConfig);
 }
 
+function renderNotFoundPage(req, res) {
+  res.render('404');
+}
+
 router.get('', renderHomePage);
 router.get('/about', renderAboutPage);
 router.get('/search', renderSearchPage);
+router.get('/*', renderNotFoundPage);
 
 module.exports = router;

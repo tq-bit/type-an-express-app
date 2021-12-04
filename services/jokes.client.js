@@ -1,4 +1,5 @@
 const axios = require('axios').default;
+const logger = require('../util/logger.util');
 
 const client = axios.create({
   baseURL: 'https://v2.jokeapi.dev/joke',
@@ -6,6 +7,9 @@ const client = axios.create({
 
 async function getRandomJoke() {
   const { data } = await client.get('/Programming?type=twopart');
+  if (data.error) {
+    logger.error(`Could not get random joke: ${data.message}`);
+  }
   return data;
 }
 
@@ -16,6 +20,9 @@ async function searchJokes({ search, all, nsfw, count }) {
     jokeQuery += ',nsfw';
   }
   const { data } = await client.get(`/${jokePath}?${jokeQuery}`);
+  if (data.error) {
+    logger.error(`Could not search for joke for '${search}': ${data.message}`);
+  }
   return data;
 }
 
