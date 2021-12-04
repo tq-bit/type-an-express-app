@@ -38,6 +38,7 @@
           </form>
           {{!-- Search form end --}}
 
+          {{#if searchResults}}
           {{!-- Joke parsing --}}
           {{#if searchResults.jokes}}
           <hr />
@@ -49,8 +50,16 @@
             </li>
             {{/each}}
           </ul>
-          {{/if}}
           {{!-- Joke parsing end --}}
+
+          {{!-- Error parsing --}}
+          {{else if searchResults.error}}
+          <div class="alert alert-warning mt-3">{{searchResults.message}}</div>
+          {{/if}}
+          {{!-- End error parsing --}}
+
+          {{/if}}
+
 
         </div>
         <footer class='card-footer bg-light d-flex justify-content-between'>

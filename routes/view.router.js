@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const readPackageJsonFile = require('../util/filesystem.util');
-const {getRandomJoke, searchJokes} = require('../services/jokes.client');
+const { getRandomJoke, searchJokes } = require('../services/jokes.client');
 
 async function renderHomePage(req, res) {
   const packageJson = await readPackageJsonFile();
@@ -16,10 +16,14 @@ async function renderAboutPage(req, res) {
 }
 
 async function renderSearchPage(req, res) {
+  const hasSearchRequest = Object.keys(req.query).length > 0
   const packageJson = await readPackageJsonFile();
-  const searchResults = await searchJokes(req.query);
-  const aboutConfig = { packageJson, searchResults };
-  res.render('search', aboutConfig);
+  let searchConfig = { packageJson };
+  if (hasSearchRequest) {
+    const searchResults = await searchJokes(req.query);
+    searchConfig = { ...searchConfig, searchResults };
+  }
+  res.render('search', searchConfig);
 }
 
 router.get('', renderHomePage);
