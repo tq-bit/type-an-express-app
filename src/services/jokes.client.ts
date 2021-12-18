@@ -1,3 +1,4 @@
+import { JokeQuery } from '../@types/index';
 import axios from 'axios';
 import logger from '../util/logger.util';
 
@@ -13,7 +14,7 @@ export async function getRandomJoke() {
   return data;
 }
 
-export async function searchJokes({ search, all, nsfw, count }) {
+export async function searchJokes({ search, all, nsfw, count }: JokeQuery) {
   const jokePath = all === 'on' ? 'Any' : 'Programming';
   let jokeQuery = `contains=${search}&amount=${count}&type=twopart&blacklistFlags=religious,racist,sexist`;
   if (nsfw !== 'on') {

@@ -1,3 +1,4 @@
+import { SearchViewConfig, JokeQuery } from '../@types/index';
 import { Router, Request, Response } from 'express';
 import readPackageJsonFile from '../util/filesystem.util';
 import { getRandomJoke, searchJokes } from '../services/jokes.client';
@@ -20,9 +21,15 @@ async function renderAboutPage(req: Request, res: Response) {
 async function renderSearchPage(req: Request, res: Response) {
   const hasSearchRequest = Object.keys(req.query).length > 0;
   const packageJson = await readPackageJsonFile();
-  let searchConfig = { packageJson };
+  let searchConfig: SearchViewConfig = { packageJson };
   if (hasSearchRequest) {
-    const searchResults = await searchJokes(req.query);
+    const jokeQuery: JokeQuery = {
+      search: `${req.query.search}`,
+      all: `${req.query.all}`,
+      nsfw: `${req.query.nsfw}`,
+      count: `${req.query.count}`,
+    };
+    const searchResults = await searchJokes(jokeQuery);
     searchConfig = { ...searchConfig, searchResults };
   }
   res.render('search', searchConfig);
