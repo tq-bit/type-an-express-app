@@ -7,4 +7,4 @@ async function readPackageJsonFile() {
   return JSON.parse(jsonString);
 }
 
-module.exports = readPackageJsonFile
+export default readPackageJsonFile

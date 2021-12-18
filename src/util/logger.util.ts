@@ -1,10 +1,7 @@
-const winston = require('winston');
+import winston from 'winston';
 
 const logger = winston.createLogger({
-  format: winston.format.combine(
-    winston.format.json(),
-    winston.format.timestamp()
-  ),
+  format: winston.format.combine(winston.format.json(), winston.format.timestamp()),
   transports: [
     new winston.transports.File({
       filename: './logs/error.log',
@@ -28,4 +25,4 @@ if (process.env.NODE_ENV !== 'production') {
   );
 }
 
-module.exports = logger;
+export default logger;
