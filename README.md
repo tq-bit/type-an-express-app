@@ -27,11 +27,14 @@ For the technology stack, I decided to use a minimal [Express.js application](ht
   },
 //
 ```
-6. Adjust paths in the `index.ts` (for app.set('views')) and in `filesystem.util.ts` (for package.json) file.
+6. Adjust paths in the `filesystem.util.ts` file (for package.json).
 
 > If you are migrating another project, make sure to resolve all relative paths properly.
 
 ## Step 2: Add TS support for your project and configure the compiler
+
+[*Link to commit*](https://github.com/tq-bit/type-an-express-app/commit/db8ced2ea27fed5e749e4ec6ba54fb2a0166ca31)
+
 1. Install the necessary packages for typescript
 
 ```shell
@@ -66,7 +69,10 @@ npm i -D ts-node @types/node @types/express @types/express-handlebars
 
 > Note that, if you try and run this app with `npm run dev` now, it will error out until you complete Step 4!
 
-## Step 3: Apply Typescript Syntax (No types yet)
+## Step 3: Apply Typescript Syntax
+
+[*Link to commit*](https://github.com/tq-bit/type-an-express-app/commit/22be3bc4c50a83bcaf30a16f7b8fb060ce9a74fa)
+
 1. Convert CommonJs to ES6 module syntax
 
 - Starting from top-down middleware -> util
@@ -94,6 +100,8 @@ import { Router, Request, Response } from 'express';
 ```
 
 ## Step 4: Fix conflicting types (optional)
+
+[*Link to commit*](https://github.com/tq-bit/type-an-express-app/commit/821be7779c8628e361b832f1419d8c54907b645f)
 
 > This step only applies if third party types, such as Express's `Request.query`, conflict with your app's dynamic types.
 
