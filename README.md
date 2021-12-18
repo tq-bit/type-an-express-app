@@ -114,6 +114,9 @@ import { Router, Request, Response } from 'express';
 > After this, the first compilation will be successful and the app runs as it did before.
 
 ## Step 5: Add types and custom interfaces
+
+[*Link to commit*](https://github.com/tq-bit/type-an-express-app/commit/a9bbaa5db10ff058a33ae57c47157e58a4e38a78)
+
 Let's start adding types, top down again, starting with middleware, ending with index.ts
 
 **Overview of Interfaces added and applied for this example:**
@@ -125,7 +128,9 @@ Let's start adding types, top down again, starting with middleware, ending with 
 - AboutViewConfig
 - SearchViewConfig
 
-## Step 6 (optional): Add Typescript to your dev pipeline
+## Step 6 (optional, recommended): Add Typescript to your dev pipeline
+
+[*Link to commit*](https://github.com/tq-bit/type-an-express-app/commit/f551fccb393fd7f604d2b8fb36c654201d03aff0)
 
 > This step applies whenever you're using a task runner, such as grunt or gulp, to build or compile your project. You can read more about Gulp on the www, e.g. in Google's [Introduction to Gulp](https://developers.google.com/web/ilt/pwa/introduction-to-gulp)
 
@@ -176,6 +181,9 @@ exports.default = gulp.series(compileTypescript, minifyHandlebarsTemplates);
 ```
 
 ## Step 7: Add npm scripts for compilation
+
+[*Link to commit*](https://github.com/tq-bit/type-an-express-app/commit/eb56007d7a54f830d79a36e785f7f60ff3dc4c18)
+
 1. Finally, let's add two scripts to build and run the app. We'll also use rimraf to clean up older versions of dist
 
 ```shell
