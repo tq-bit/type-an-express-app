@@ -4,7 +4,10 @@
   "description": "This app was written for my article about getting started with Typescript. It demonstrates how to setup and develop a simple web application using TS and Express-Handlebars.",
   "main": "src/index.ts",
   "scripts": {
-    "dev": "nodemon src/index.ts"
+    "dev": "nodemon src/index.ts",
+    "build": "rimraf -r dist && gulp",
+    "start": "node dist/index.js",
+    "serve": "npm run build && npm run start"
   },
   "author": "Tobias Quante",
   "license": "MIT",
@@ -22,6 +25,7 @@
     "gulp-htmlmin": "^5.0.1",
     "gulp-typescript": "^6.0.0-alpha.1",
     "nodemon": "^2.0.15",
+    "rimraf": "^3.0.2",
     "ts-node": "^10.4.0"
   }
 }
