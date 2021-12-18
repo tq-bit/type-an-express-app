@@ -1,16 +1,23 @@
-# Checklist to migrate a Node.js app to Typescript
+# ✅ Checklist to migrate a Node.js app to Typescript
 
-- Requires `rimraf` and `gulp` and node v14 for fs/promises to work.
+This repository is a demo to migrate a Node.js application to Typescript. It serves as a stating point, as well as a step-by-step guide for my blogpost 'A step-by-step guide to migrate a Node webapp to Typescript'.
 
-## Step 1. Update the project's structure, if you haven't yet
+For the technology stack, I decided to use a minimal [Express.js application](https://expressjs.com/) with the common [route](https://expressjs.com/en/guide/routing.html) + [middleware](https://expressjs.com/en/guide/writing-middleware.html) functionality. The app also includes a view layer written with [Handlebars.js](https://handlebarsjs.com/). It uses an [express-handlebars view engine](https://www.npmjs.com/package/express-handlebars).
+
+> The app requires Node v14+ to work properly, please make sure to have it installed before you start.
+
+## Step 1. Update the project's structure
+
+[*Link to commit*](https://github.com/tq-bit/type-an-express-app/commit/30b5d4eaa8c1addb263a199b9475a8a98d5a7387)
+
 1. Create a folder named 'src'
 2. Move all app related folders and files into it
-  - /routes
-  - /services
-  - /middleware
-  - /util
-  - /index.js
-4. Rename all .js files to .ts files
+  - `/routes/*`
+  - `/services/*`
+  - `/middleware/*`
+  - `/util/*`
+  - `/index.js`
+4. Change the `.js` - file extension of all files to `.ts`
 5. Adjust npm dev script and the app's entrypoint
 ```json
 //
@@ -33,7 +40,7 @@ npm i -D ts-node @types/node @types/express @types/express-handlebars
 
 > If you are using its latest version, nodemon will use ts-node to compile Typescript files under the hood - you will not need an additional build step.
 
-2. Add a `tsconfig.json` file to your project's root. Fill it with the following configuration: 
+2. Add a `tsconfig.json` file to your project's root. Fill it with the following configuration:
 
 ```json
 {
@@ -67,7 +74,7 @@ npm i -D ts-node @types/node @types/express @types/express-handlebars
 - Replace `module.exports` with `export default`
 - In `/services/jokes.client.ts`, replace `module.exports` with `export` for each function
 
-2. Add Express types in the `view.router.ts` and `accesslog.middleware.ts` files 
+2. Add Express types in the `view.router.ts` and `accesslog.middleware.ts` files
 - req: Request
 - res: Response
 - next: NextFunction
@@ -93,7 +100,7 @@ import { Router, Request, Response } from 'express';
  1. Create `/src/@types/index.d.ts` file
  2. When running `npm run dev`, there still is a problem with `req.query` in the `jokes.client.ts` file's function `searchJokes`
  3. There is also a conflict with `searchConfig` in the `view.router.ts` file. It shows the following error message: `Object literal may only specify known properties`
- 4. Let's add the first two custom types now: `JokeQuery` and `SearchViewConfig`. 
+ 4. Let's add the first two custom types now: `JokeQuery` and `SearchViewConfig`.
  5. After creation, they can be imported and applied.
 
 > After this, the first compilation will be successful and the app runs as it did before.
