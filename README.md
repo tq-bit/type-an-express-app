@@ -114,4 +114,105 @@ import { Router, Request, Response } from 'express';
 > After this, the first compilation will be successful and the app runs as it did before.
 
 ## Step 5: Add types and custom interfaces
-Let's sta
+Let's start adding types, top down again, starting with middleware, ending with index.ts
+
+**Overview of Interfaces added and applied for this example:**
+
+- AppMetadata
+- RandomTwoPartJoke
+- MultipleJokesResponse
+- HomeViewConfig
+- AboutViewConfig
+- SearchViewConfig
+
+## Step 6 (optional): Add Typescript to your dev pipeline
+
+> This step applies whenever you're using a task runner, such as grunt or gulp, to build or compile your project. You can read more about Gulp on the www, e.g. in Google's [Introduction to Gulp](https://developers.google.com/web/ilt/pwa/introduction-to-gulp)
+
+1. Install gulp globally and install the `gulp-typescript` plugin in your project
+2. Let's also install `gulp-htmlmin` to minify our HTML code for our app's view (it's Handlebars syntax, but will be recognized by the plugin)
+
+```shell
+npm i -g gulp-cli
+npm i -D gulp@4 gulp-typescript
+npm i -D gulp-htmlmin
+```
+
+3. Create a `gulpfile.js` in your project's root and add the following to it:
+
+```js
+const gulp = require('gulp');
+const ts = require('gulp-typescript');
+const tsProject = ts.createProject('tsconfig.json');
+
+function compileTypescript() {
+  const tsResult = gulp.src('src/**/*.ts').pipe(tsProject());
+
+  return tsResult.js.pipe(gulp.dest('dist'));
+}
+```
+
+4. (Optional) If you have other tasks to run, such as htmlmin or CSS preprocessing, you can include them as part of `gulp.series`. In this case, instead of the above, add the following to your `gulpfile.js`:
+
+```js
+const gulp = require('gulp');
+const ts = require('gulp-typescript');
+const htmlmin = require('gulp-htmlmin');
+const tsProject = ts.createProject('tsconfig.json');
+
+function compileTypescript() {
+  const tsResult = gulp.src('src/**/*.ts').pipe(tsProject());
+  return tsResult.js.pipe(gulp.dest('dist'));
+}
+
+function minifyHandlebarsTemplates() {
+  return gulp
+    .src(['src/views/*.handlebars', 'src/views/**/*.handlebars'])
+    .pipe(htmlmin({ collapseWhitespace: true }))
+    .pipe(gulp.dest('dist/views'));
+}
+
+exports.default = gulp.series(compileTypescript, minifyHandlebarsTemplates);
+```
+
+## Step 7: Add npm scripts for compilation
+1. Finally, let's add two scripts to build and run the app. We'll also use rimraf to clean up older versions of dist
+
+```shell
+npm i -D rimraf
+```
+
+- `dev` will use `nodemon` and `ts-node` to launch the app for development
+- `build` will get rid of the old app's distro and run build a new version
+- `start` will run the built application
+- `serve` is a shortcut for the `build` and `start` steps
+
+> If you decided to skip step 6, you must make sure all non-Typescript folders are still available in your `dist` folder. When using the **Only Typescript compilation** option, `views` will not be moved & minified by the tsc compiler.
+
+**Only Typescript compilation**
+
+```json
+// ...
+  "scripts": {
+    "dev": "nodemon src/index.ts",
+    "build": "rimraf -r dist && tsc",
+    "start": "node dist/index.js",
+    "serve": "npm run build && npm run start"
+  },
+// ...
+```
+
+**Gulp workflow**
+
+```json
+// ...
+  "scripts": {
+    "dev": "nodemon src/index.ts",
+    "build": "rimraf -r dist && gulp",
+    "start": "node dist/index.js",
+    "serve": "npm run build && npm run start"
+  },
+// ...
+```
+
+2. To wrap things up, let's now run `npm run serve` and see what we get. Given everything went well, the compilaton was successful and the app is running as it did before.
