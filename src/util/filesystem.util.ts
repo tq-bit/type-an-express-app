@@ -1,7 +1,9 @@
+import { AppMetadata } from "../@types";
+
 const fs = require("fs/promises")
 const path = require("path")
 
-async function readPackageJsonFile() {
+async function readPackageJsonFile(): Promise<AppMetadata> {
   const jsonBuffer = await fs.readFile(path.join(__dirname, '../../package.json'));
   const jsonString = Buffer.from(jsonBuffer).toString('utf-8')
   return JSON.parse(jsonString);

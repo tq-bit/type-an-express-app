@@ -1,12 +1,12 @@
-const HOST = '0.0.0.0';
-const PORT = 3000;
+const HOST: string = '0.0.0.0';
+const PORT: Number = 3000;
 
 import express from 'express';
 import { engine } from 'express-handlebars';
 import viewRouter from './routes/view.router';
 import logger from './util/logger.util';
 import accessLogger from './middleware/accesslog.middleware';
-const app = express();
+const app: express.Application = express();
 
 app.use(accessLogger);
 app.use(express.static('public'));

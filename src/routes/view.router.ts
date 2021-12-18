@@ -1,26 +1,34 @@
-import { SearchViewConfig, JokeQuery } from '../@types/index';
+import {
+  SearchViewConfig,
+  JokeQuery,
+  AppMetadata,
+  RandomTwoPartJoke,
+  HomeViewConfig,
+  AboutViewConfig,
+  MultipleJokesResponse,
+} from '../@types/index';
 import { Router, Request, Response } from 'express';
 import readPackageJsonFile from '../util/filesystem.util';
 import { getRandomJoke, searchJokes } from '../services/jokes.client';
 
-const router = Router();
+const router: Router = Router();
 
-async function renderHomePage(req: Request, res: Response) {
-  const packageJson = await readPackageJsonFile();
-  const randomJoke = await getRandomJoke();
-  const homeConfig = { packageJson, randomJoke };
+async function renderHomePage(req: Request, res: Response): Promise<void> {
+  const packageJson: AppMetadata = await readPackageJsonFile();
+  const randomJoke: RandomTwoPartJoke = await getRandomJoke();
+  const homeConfig: HomeViewConfig = { packageJson, randomJoke };
   res.render('home', homeConfig);
 }
 
-async function renderAboutPage(req: Request, res: Response) {
-  const packageJson = await readPackageJsonFile();
-  const aboutConfig = { packageJson };
+async function renderAboutPage(req: Request, res: Response): Promise<void> {
+  const packageJson: AppMetadata = await readPackageJsonFile();
+  const aboutConfig: AboutViewConfig = { packageJson };
   res.render('about', aboutConfig);
 }
 
-async function renderSearchPage(req: Request, res: Response) {
-  const hasSearchRequest = Object.keys(req.query).length > 0;
-  const packageJson = await readPackageJsonFile();
+async function renderSearchPage(req: Request, res: Response): Promise<void> {
+  const hasSearchRequest: Boolean = Object.keys(req.query).length > 0;
+  const packageJson: AppMetadata = await readPackageJsonFile();
   let searchConfig: SearchViewConfig = { packageJson };
   if (hasSearchRequest) {
     const jokeQuery: JokeQuery = {
@@ -29,13 +37,13 @@ async function renderSearchPage(req: Request, res: Response) {
       nsfw: `${req.query.nsfw}`,
       count: `${req.query.count}`,
     };
-    const searchResults = await searchJokes(jokeQuery);
+    const searchResults: MultipleJokesResponse = await searchJokes(jokeQuery);
     searchConfig = { ...searchConfig, searchResults };
   }
   res.render('search', searchConfig);
 }
 
-function renderNotFoundPage(req: Request, res: Response) {
+function renderNotFoundPage(req: Request, res: Response): void {
   res.render('404');
 }
 

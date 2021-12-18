@@ -1,12 +1,12 @@
-import { JokeQuery } from '../@types/index';
-import axios from 'axios';
+import { JokeQuery, MultipleJokesResponse, RandomTwoPartJoke } from '../@types/index';
+import axios, { AxiosInstance } from 'axios';
 import logger from '../util/logger.util';
 
-const client = axios.create({
+const client: AxiosInstance = axios.create({
   baseURL: 'https://v2.jokeapi.dev/joke',
 });
 
-export async function getRandomJoke() {
+export async function getRandomJoke(): Promise<RandomTwoPartJoke> {
   const { data } = await client.get('/Programming?type=twopart');
   if (data.error) {
     logger.error(`Could not get random joke: ${data.message}`);
@@ -14,7 +14,7 @@ export async function getRandomJoke() {
   return data;
 }
 
-export async function searchJokes({ search, all, nsfw, count }: JokeQuery) {
+export async function searchJokes({ search, all, nsfw, count }: JokeQuery): Promise<MultipleJokesResponse >{
   const jokePath = all === 'on' ? 'Any' : 'Programming';
   let jokeQuery = `contains=${search}&amount=${count}&type=twopart&blacklistFlags=religious,racist,sexist`;
   if (nsfw !== 'on') {
