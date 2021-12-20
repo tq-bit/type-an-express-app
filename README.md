@@ -53,10 +53,8 @@ npm i -D ts-node @types/node @types/express @types/express-handlebars
     "module": "commonjs",
     "moduleResolution": "node",
     "strict": true,
-    "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "types": ["node"]
   },
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Recommended",
@@ -64,6 +62,16 @@ npm i -D ts-node @types/node @types/express @types/express-handlebars
   "exclude": ["node_modules", "**/*.spec.ts"]
 }
 ```
+
+References for the chosen  options:
+
+- [target](https://www.staging-typescript.org/tsconfig#target) - The Javascript ECMA version, e.g. `ES5`, `ES6`, ...
+- [outDir](https://www.staging-typescript.org/tsconfig#outDir) - The directory into which Javascript files are compiled. Commonly used: `dist`, `build`
+- [module](https://www.staging-typescript.org/tsconfig#module) - The type of module to compile into. e.g. `commonjs`, `amd`, ...
+- [moduleResolution](https://www.staging-typescript.org/tsconfig#moduleResolution) - Strategy to resolve modules.
+- [strict](https://www.staging-typescript.org/tsconfig#strict) - Enables a variety of strict type checks for variables and functions
+- [skipLibCheck](https://www.staging-typescript.org/tsconfig#skipLibCheck) - Skip type checking on declaration files
+- [forceConsistentCasingInFileNames](https://www.staging-typescript.org/tsconfig#forceConsistentCasingInFileNames) - Issue an error if a program tries to include a file by a casing different from the casing on disk.
 
 > You can alternatively use the [recommended base](https://www.npmjs.com/package/@tsconfig/recommended) for a `tsconfig` file.
 
