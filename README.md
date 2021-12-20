@@ -81,7 +81,7 @@ References for the chosen  options:
 
 [*Link to commit*](https://github.com/tq-bit/type-an-express-app/commit/22be3bc4c50a83bcaf30a16f7b8fb060ce9a74fa)
 
-1. Convert CommonJs to ES6 module syntax
+1. Convert CommonJs to ES6 module syntax (if you're asking yourself whether this is really necessary: It is not (really)). And if you wonder what the difference is, check out this [thread on Stackoverflow](https://stackoverflow.com/questions/31354559/using-node-js-require-vs-es6-import-export)
 
 - Starting from top-down middleware -> util
 - Replace const - require with import - from
