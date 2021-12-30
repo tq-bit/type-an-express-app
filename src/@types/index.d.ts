@@ -1,3 +1,5 @@
+export type JokePath = 'Any' | 'Programming'
+
 export interface JokeQuery {
   search: string,
   all: string

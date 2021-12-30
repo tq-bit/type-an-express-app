@@ -1,4 +1,4 @@
-import { JokeQuery, MultipleJokesResponse, RandomTwoPartJoke } from '../@types/index';
+import { JokeQuery, MultipleJokesResponse, JokePath, RandomTwoPartJoke } from '../@types/index';
 import axios, { AxiosInstance } from 'axios';
 import logger from '../util/logger.util';
 
@@ -15,7 +15,7 @@ export async function getRandomJoke(): Promise<RandomTwoPartJoke> {
 }
 
 export async function searchJokes({ search, all, nsfw, count }: JokeQuery): Promise<MultipleJokesResponse >{
-  const jokePath = all === 'on' ? 'Any' : 'Programming';
+  const jokePath: JokePath = all === 'on' ? 'Any' : 'Programming';
   let jokeQuery = `contains=${search}&amount=${count}&type=twopart&blacklistFlags=religious,racist,sexist`;
   if (nsfw !== 'on') {
     jokeQuery += ',nsfw';
